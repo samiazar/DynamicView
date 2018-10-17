@@ -33,12 +33,12 @@ public class XmlLinearLayout extends XmlView {
 
     @Override
     public View getView() throws IOException, XmlPullParserException {
+        xmlParser.require(XmlPullParser.START_TAG, TagKey.NameSpace, TagView.LinearLayout);
         initBasicAttribute();
         if (layoutParams == null) return null;
         view.setLayoutParams(layoutParams);
 
         // add attribute of self view
-        xmlParser.require(XmlPullParser.START_TAG, TagKey.NameSpace, TagView.LinearLayout);
         readGravityAttribute();
         readOrientationAttribute();
         readSumWeightAttribute();

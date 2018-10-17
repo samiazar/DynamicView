@@ -12,20 +12,20 @@ public class StaticValues {
             "    android:layout_width=\"match_parent\"" +
             "    android:layout_height=\"match_parent\"" +
             "    android:orientation=\"vertical\"" +
-            "    android:background=\"#68a\">" +
+            "    android:background=\"#6688aa\">" +
             "    <TextView" +
             "        android:layout_width=\"wrap_content\"" +
             "        android:layout_height=\"wrap_content\"" +
             "        android:textStyle=\"bold\"" +
             "        android:text=\"Title\"" +
             "        android:layout_gravity=\"center\"" +
-            "        android:textColor=\"#63a\"" +
+            "        android:textColor=\"#6633aa\"" +
             "        android:textSize=\"64dp\"/>" +
             "    " +
             "    <LinearLayout" +
             "        android:layout_width=\"match_parent\"" +
             "        android:layout_height=\"26dp\"" +
-            "        android:background=\"#985\"" +
+            "        android:background=\"#998855\"" +
             "        android:layout_margin=\"12dp\"/>" +
             "    " +
             "    <TextView" +
@@ -34,7 +34,7 @@ public class StaticValues {
             "        android:textStyle=\"bold\"" +
             "        android:text=\"SubTitle\"" +
             "        android:layout_gravity=\"center\"" +
-            "        android:textColor=\"#21a\"" +
+            "        android:textColor=\"#2211aa\"" +
             "        android:textSize=\"24dp\"/>" +
             "" +
             "</LinearLayout>";

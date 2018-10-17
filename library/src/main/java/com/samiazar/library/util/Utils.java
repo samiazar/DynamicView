@@ -38,20 +38,20 @@ public class Utils {
     public static int parseResource(String resource) {
         if (resource.charAt(0) == '@') {
             Log.e(TAG, "in this time only support # color string for resource");
-            return 0;
+            return -1;
         } else {
             Log.e(TAG, "in this time only support # color and @ address string for resource");
-            return 0;
+            return -1;
         }
     }
 
     public static int parseColor(String color) {
         if (color.charAt(0) == '#') {
-            if (color.matches("^#[0-9a-fA-F]{8}$|#[0-9a-fA-F]{6}$|#[0-9a-fA-F]{4}$|#[0-9a-fA-F]{3}$"))
+            if (color.matches("^#[0-9a-fA-F]{8}$|#[0-9a-fA-F]{6}$"))
                 return Color.parseColor(color);
             else {
                 Log.e(TAG, "make sure you declare color in right way like #RGB or #ARGB or #RRGGBB or #AARRGGBB");
-                return 0;
+                return -1;
             }
         } else {
             Log.e(TAG, "in this time only support hex color string for color");
