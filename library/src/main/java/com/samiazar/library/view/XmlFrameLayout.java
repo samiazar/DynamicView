@@ -35,7 +35,6 @@ public class XmlFrameLayout extends XmlView {
         view.setLayoutParams(layoutParams);
 
         // add attribute of self view
-        xmlParser.require(XmlPullParser.START_TAG, TagKey.NameSpace, TagView.FrameLayout);
 
         // add children of view
         while (xmlParser.next() != XmlPullParser.END_TAG) {
@@ -44,7 +43,6 @@ public class XmlFrameLayout extends XmlView {
         }
 
         //end of parsing this view
-        xmlParser.require(XmlPullParser.END_TAG, TagKey.NameSpace, TagView.FrameLayout);
         return view;
     }
 }

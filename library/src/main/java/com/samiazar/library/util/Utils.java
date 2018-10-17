@@ -38,10 +38,10 @@ public class Utils {
     public static int parseResource(String resource) {
         if (resource.charAt(0) == '@') {
             Log.e(TAG, "in this time only support # color string for resource");
-            return -1;
+            return 0;
         } else {
             Log.e(TAG, "in this time only support # color and @ address string for resource");
-            return -1;
+            return 0;
         }
     }
 
@@ -51,11 +51,11 @@ public class Utils {
                 return Color.parseColor(color);
             else {
                 Log.e(TAG, "make sure you declare color in right way like #RGB or #ARGB or #RRGGBB or #AARRGGBB");
-                return -1;
+                return 0;
             }
         } else {
             Log.e(TAG, "in this time only support hex color string for color");
-            return -1;
+            return 0;
         }
     }
 }

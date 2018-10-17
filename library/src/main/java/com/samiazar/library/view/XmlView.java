@@ -84,7 +84,7 @@ public class XmlView {
                 height = ViewGroup.LayoutParams.MATCH_PARENT;
                 break;
             default:
-                height = Utils.parseDpSize(widthValue, view.getContext());
+                height = Utils.parseDpSize(heightValue, view.getContext());
                 if (height < 0) {
                     Log.e(TAG, "make sure you set layout_height in all views");
                     throw new XmlPullParserException("make sure you set layout_height in all views");
@@ -107,33 +107,44 @@ public class XmlView {
     private void readLinearLayoutAttribute() throws XmlPullParserException {
         if (!(layoutParams instanceof LinearLayout.LayoutParams)) return;
 
-        //LayoutGravity
+        //region LayoutGravity
         String gravityValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.LayoutGravity);
         if (gravityValue != null && !gravityValue.equals("")) {
             String[] gravityList = gravityValue.split("\\|");
-            for (String gravity : gravityList) {
-                switch (gravity) {
+            int gravity = 0;
+            for (String temp : gravityList) {
+                switch (temp) {
                     case TagValue.Right:
-                        ((LinearLayout.LayoutParams) layoutParams).gravity += Gravity.RIGHT;
+                        gravity += Gravity.RIGHT;
+                        break;
                     case TagValue.Left:
-                        ((LinearLayout.LayoutParams) layoutParams).gravity += Gravity.LEFT;
+                        gravity += Gravity.LEFT;
+                        break;
                     case TagValue.Bottom:
-                        ((LinearLayout.LayoutParams) layoutParams).gravity += Gravity.BOTTOM;
+                        gravity += Gravity.BOTTOM;
+                        break;
                     case TagValue.Top:
-                        ((LinearLayout.LayoutParams) layoutParams).gravity += Gravity.TOP;
+                        gravity += Gravity.TOP;
+                        break;
                     case TagValue.Center:
-                        ((LinearLayout.LayoutParams) layoutParams).gravity += Gravity.CENTER;
+                        gravity += Gravity.CENTER;
+                        break;
                     case TagValue.CenterHorizontal:
-                        ((LinearLayout.LayoutParams) layoutParams).gravity += Gravity.CENTER_HORIZONTAL;
+                        gravity += Gravity.CENTER_HORIZONTAL;
+                        break;
                     case TagValue.CenterVertical:
-                        ((LinearLayout.LayoutParams) layoutParams).gravity += Gravity.CENTER_VERTICAL;
+                        gravity += Gravity.CENTER_VERTICAL;
+                        break;
                     default:
                         throw new XmlPullParserException("The value of gravity in each view must be one of the 'right', 'left', 'bottom', 'top', " +
                                 "'center', 'center_horizontal', 'center_vertical'");
                 }
             }
+            ((LinearLayout.LayoutParams) layoutParams).gravity = gravity;
         }
-        //Weight
+        //endregion
+
+        //region Weight
         String weightValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.Weight);
         if (weightValue != null && !weightValue.equals("")) {
             try {
@@ -143,6 +154,7 @@ public class XmlView {
                 throw new XmlPullParserException("the value of weight in each view must be pure integer");
             }
         }
+        //endregion
     }
 
     private void readRelativeLayoutAttribute() throws XmlPullParserException {
@@ -237,9 +249,9 @@ public class XmlView {
         String background = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.Background);
         if (background!=null && !background.equals("")) {
             int resource = Utils.parseColor(background);
-            if (resource < 0) {
+            if (resource == 0) {
                 resource = Utils.parseResource(background);
-                if (resource < 0)
+                if (resource == 0)
                     throw new XmlPullParserException("The value of background resource in view must be color like #rgb or address resource like @drawable");
                 view.setBackgroundResource(resource);
             } else {
@@ -272,5 +284,6 @@ public class XmlView {
         if (tag != null && !tag.equals("")) {
             view.setTag(tag);
         }
+        //endregion
     }
 }

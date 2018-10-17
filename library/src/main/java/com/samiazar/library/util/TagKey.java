@@ -12,7 +12,7 @@ public class TagKey {
     public static final String LayoutHeight = "android:layout_height";
     public static final String LayoutGravity = "android:layout_gravity";
     public static final String Gravity = "android:gravity";
-    public static final String Weight = "android:layout_width";
+    public static final String Weight = "android:layout_weight";
     public static final String Margin = "android:layout_margin";
     public static final String MarginLeft = "android:layout_marginLeft";
     public static final String MarginRight = "android:layout_marginRight";

@@ -34,12 +34,10 @@ public class XmlButton extends XmlTextView {
         view.setLayoutParams(layoutParams);
 
         // add attribute of self view
-        xmlParser.require(XmlPullParser.START_TAG, TagKey.NameSpace, TagView.Button);
         initTextAttribute();
 
         xmlParser.next();
         //end of parsing this view
-        xmlParser.require(XmlPullParser.END_TAG, TagKey.NameSpace, TagView.Button);
         return view;
     }
 }

@@ -45,12 +45,10 @@ public class XmlTextView extends XmlView {
         view.setLayoutParams(layoutParams);
 
         // add attribute of self view
-        xmlParser.require(XmlPullParser.START_TAG, TagKey.NameSpace, TagView.TextView);
         initTextAttribute();
 
         xmlParser.next();
         //end of parsing this view
-        xmlParser.require(XmlPullParser.END_TAG, TagKey.NameSpace, TagView.TextView);
         return view;
     }
 
@@ -153,18 +151,25 @@ public class XmlTextView extends XmlView {
                 switch (temp) {
                     case TagValue.Right:
                         gravity += Gravity.RIGHT;
+                        break;
                     case TagValue.Left:
                         gravity += Gravity.LEFT;
+                        break;
                     case TagValue.Bottom:
                         gravity += Gravity.BOTTOM;
+                        break;
                     case TagValue.Top:
                         gravity += Gravity.TOP;
+                        break;
                     case TagValue.Center:
                         gravity += Gravity.CENTER;
+                        break;
                     case TagValue.CenterHorizontal:
                         gravity += Gravity.CENTER_HORIZONTAL;
+                        break;
                     case TagValue.CenterVertical:
                         gravity += Gravity.CENTER_VERTICAL;
+                        break;
                     default:
                         throw new XmlPullParserException("The value of gravity in each view must be one of the 'right', 'left', 'bottom', 'top', " +
                                 "'center', 'center_horizontal', 'center_vertical'");
@@ -229,7 +234,7 @@ public class XmlTextView extends XmlView {
         String textColorValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.TextColor);
         if (textColorValue != null && !textColorValue.equals("")) {
             int color = Utils.parseColor(textColorValue);
-            if (color < 0)
+            if (color == 0)
                 throw new XmlPullParserException("The attribute text color define in wrong way");
             ((TextView) view).setTextColor(color);
         }
@@ -237,7 +242,7 @@ public class XmlTextView extends XmlView {
         String textHintColorValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.TextColorHint);
         if (textHintColorValue != null && !textHintColorValue.equals("")) {
             int color = Utils.parseColor(textHintColorValue);
-            if (color < 0)
+            if (color == 0)
                 throw new XmlPullParserException("The attribute text color define in wrong way");
             ((TextView) view).setHintTextColor(color);
         }

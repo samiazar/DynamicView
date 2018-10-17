@@ -11,10 +11,13 @@ import android.view.View;
 
 import com.samiazar.library.util.ParentType;
 import com.samiazar.library.util.TagView;
+import com.samiazar.library.view.XmlButton;
+import com.samiazar.library.view.XmlEditText;
 import com.samiazar.library.view.XmlFrameLayout;
 import com.samiazar.library.view.XmlLinearLayout;
 import com.samiazar.library.view.XmlRelativeLayout;
 import com.samiazar.library.view.XmlScrollView;
+import com.samiazar.library.view.XmlTextView;
 import com.samiazar.library.view.XmlView;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -75,11 +78,11 @@ public class XmlParser {
             case TagView.FrameLayout:
                 return new XmlFrameLayout(context, parser, parentType).getView();
             case TagView.TextView:
-                return new XmlFrameLayout(context, parser, parentType).getView();
+                return new XmlTextView(context, parser, parentType).getView();
             case TagView.Button:
-                return new XmlFrameLayout(context, parser, parentType).getView();
+                return new XmlButton(context, parser, parentType).getView();
             case TagView.EditText:
-                return new XmlFrameLayout(context, parser, parentType).getView();
+                return new XmlEditText(context, parser, parentType).getView();
             default:
                 return null;
         }

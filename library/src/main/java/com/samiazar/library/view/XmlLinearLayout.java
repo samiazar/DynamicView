@@ -33,7 +33,6 @@ public class XmlLinearLayout extends XmlView {
 
     @Override
     public View getView() throws IOException, XmlPullParserException {
-        xmlParser.require(XmlPullParser.START_TAG, TagKey.NameSpace, TagView.LinearLayout);
         initBasicAttribute();
         if (layoutParams == null) return null;
         view.setLayoutParams(layoutParams);
@@ -49,7 +48,6 @@ public class XmlLinearLayout extends XmlView {
         }
 
         //end of parsing this view
-        xmlParser.require(XmlPullParser.END_TAG, TagKey.NameSpace, TagView.LinearLayout);
         return view;
     }
 
@@ -63,18 +61,25 @@ public class XmlLinearLayout extends XmlView {
                 switch (temp) {
                     case TagValue.Right:
                         gravity += Gravity.RIGHT;
+                        break;
                     case TagValue.Left:
                         gravity += Gravity.LEFT;
+                        break;
                     case TagValue.Bottom:
                         gravity += Gravity.BOTTOM;
+                        break;
                     case TagValue.Top:
                         gravity += Gravity.TOP;
+                        break;
                     case TagValue.Center:
                         gravity += Gravity.CENTER;
+                        break;
                     case TagValue.CenterHorizontal:
                         gravity += Gravity.CENTER_HORIZONTAL;
+                        break;
                     case TagValue.CenterVertical:
                         gravity += Gravity.CENTER_VERTICAL;
+                        break;
                     default:
                         throw new XmlPullParserException("The value of gravity in each view must be one of the 'right', 'left', 'bottom', 'top', " +
                                 "'center', 'center_horizontal', 'center_vertical'");
