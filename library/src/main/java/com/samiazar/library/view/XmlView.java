@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
+import com.samiazar.library.XmlParser;
 import com.samiazar.library.util.ParentType;
 import com.samiazar.library.util.TagKey;
 import com.samiazar.library.util.TagValue;
@@ -41,6 +42,7 @@ public class XmlView {
     }
 
     public void initBasicAttribute() throws IOException, XmlPullParserException {
+        readId();
         readWidthHeight();
         if (layoutParams == null) return;
         readLinearLayoutAttribute();
@@ -53,6 +55,15 @@ public class XmlView {
         if (layoutParams == null) return null;
         view.setLayoutParams(layoutParams);
         return view;
+    }
+
+    private void readId() throws XmlPullParserException {
+        String idValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.Id);
+        if (idValue != null && !idValue.equals("")) {
+            int id = Utils.parseId(idValue);
+            if (id < 0 ) throw new XmlPullParserException("make sure define id for views in right way");
+            view.setId(id);
+        }
     }
 
     private void readWidthHeight() throws XmlPullParserException {
@@ -159,6 +170,153 @@ public class XmlView {
 
     private void readRelativeLayoutAttribute() throws XmlPullParserException {
         if (!(layoutParams instanceof RelativeLayout.LayoutParams)) return;
+
+        String aboveValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.Above);
+        if (aboveValue!=null && !aboveValue.equals("")) {
+            int targetViewId = Utils.parseId(aboveValue);
+            if (targetViewId < 0) throw new XmlPullParserException("make sure define id of target view for above attribute is right");
+            ((RelativeLayout.LayoutParams) layoutParams).addRule(RelativeLayout.ABOVE, targetViewId);
+        }
+
+        String belowValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.Below);
+        if (belowValue!=null && !belowValue.equals("")) {
+            int targetViewId = Utils.parseId(belowValue);
+            if (targetViewId < 0) throw new XmlPullParserException("make sure define id of target view for below attribute is right");
+            ((RelativeLayout.LayoutParams) layoutParams).addRule(RelativeLayout.BELOW, targetViewId);
+        }
+
+        String rightOfValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.ToRightOf);
+        if (rightOfValue!=null && !rightOfValue.equals("")) {
+            int targetViewId = Utils.parseId(rightOfValue);
+            if (targetViewId < 0) throw new XmlPullParserException("make sure define id of target view for toRightOf attribute is right");
+            ((RelativeLayout.LayoutParams) layoutParams).addRule(RelativeLayout.RIGHT_OF, targetViewId);
+        }
+
+        String leftOfValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.ToLeftOf);
+        if (leftOfValue!=null && !leftOfValue.equals("")) {
+            int targetViewId = Utils.parseId(leftOfValue);
+            if (targetViewId < 0) throw new XmlPullParserException("make sure define id of target view for toLeftOf attribute is right");
+            ((RelativeLayout.LayoutParams) layoutParams).addRule(RelativeLayout.LEFT_OF, targetViewId);
+        }
+
+        String alignTopValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.AlignTop);
+        if (alignTopValue!=null && !alignTopValue.equals("")) {
+            int targetViewId = Utils.parseId(alignTopValue);
+            if (targetViewId < 0) throw new XmlPullParserException("make sure define id of target view for alignTop attribute is right");
+            ((RelativeLayout.LayoutParams) layoutParams).addRule(RelativeLayout.ALIGN_TOP, targetViewId);
+        }
+
+        String alignBottomValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.AlignBttom);
+        if (alignBottomValue!=null && !alignBottomValue.equals("")) {
+            int targetViewId = Utils.parseId(alignBottomValue);
+            if (targetViewId < 0) throw new XmlPullParserException("make sure define id of target view for alignBottom attribute is right");
+            ((RelativeLayout.LayoutParams) layoutParams).addRule(RelativeLayout.ALIGN_BOTTOM, targetViewId);
+        }
+
+        String alignBaselineValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.AlignBaseline);
+        if (alignBaselineValue!=null && !alignBaselineValue.equals("")) {
+            int targetViewId = Utils.parseId(alignBaselineValue);
+            if (targetViewId < 0) throw new XmlPullParserException("make sure define id of target view for alignBaseline attribute is right");
+            ((RelativeLayout.LayoutParams) layoutParams).addRule(RelativeLayout.ALIGN_BASELINE, targetViewId);
+        }
+
+        String alignLeftValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.AlignLeft);
+        if (alignLeftValue!=null && !alignLeftValue.equals("")) {
+            int targetViewId = Utils.parseId(alignLeftValue);
+            if (targetViewId < 0) throw new XmlPullParserException("make sure define id of target view for alignLeft attribute is right");
+            ((RelativeLayout.LayoutParams) layoutParams).addRule(RelativeLayout.ALIGN_LEFT, targetViewId);
+        }
+
+        String alignRightValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.AlignRight);
+        if (alignRightValue!=null && !alignRightValue.equals("")) {
+            int targetViewId = Utils.parseId(alignRightValue);
+            if (targetViewId < 0) throw new XmlPullParserException("make sure define id of target view for alignRight attribute is right");
+            ((RelativeLayout.LayoutParams) layoutParams).addRule(RelativeLayout.ALIGN_RIGHT, targetViewId);
+        }
+
+        String alignParentTopValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.AlignParentTop);
+        if (alignParentTopValue!=null && !alignParentTopValue.equals("")) {
+            try {
+                boolean alignParentTop = Boolean.valueOf(alignParentTopValue);
+                if (alignParentTop)
+                    ((RelativeLayout.LayoutParams) layoutParams).addRule(RelativeLayout.ALIGN_PARENT_TOP);
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new XmlPullParserException("make sure define boolean for alignParentTop attribute is right");
+            }
+        }
+
+        String alignParentBottomValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.AlignParentBottom);
+        if (alignParentBottomValue!=null && !alignParentBottomValue.equals("")) {
+            try {
+                boolean alignParentBottom = Boolean.valueOf(alignParentBottomValue);
+                if (alignParentBottom)
+                    ((RelativeLayout.LayoutParams) layoutParams).addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new XmlPullParserException("make sure define boolean for alignParentBottom attribute is right");
+            }
+        }
+
+        String alignParentRightValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.AlignParentRight);
+        if (alignParentRightValue!=null && !alignParentRightValue.equals("")) {
+            try {
+                boolean alignParentRight = Boolean.valueOf(alignParentRightValue);
+                if (alignParentRight)
+                    ((RelativeLayout.LayoutParams) layoutParams).addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new XmlPullParserException("make sure define boolean for alignParentRight attribute is right");
+            }
+        }
+
+        String alignParentLeftValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.AlignParentLeft);
+        if (alignParentLeftValue!=null && !alignParentLeftValue.equals("")) {
+            try {
+                boolean alignParentLeft = Boolean.valueOf(alignParentLeftValue);
+                if (alignParentLeft)
+                    ((RelativeLayout.LayoutParams) layoutParams).addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new XmlPullParserException("make sure define boolean for alignParentLeft attribute is right");
+            }
+        }
+
+        String centerInParentValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.CenterInParent);
+        if (centerInParentValue!=null && !centerInParentValue.equals("")) {
+            try {
+                boolean centerInParent = Boolean.valueOf(centerInParentValue);
+                if (centerInParent)
+                    ((RelativeLayout.LayoutParams) layoutParams).addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new XmlPullParserException("make sure define boolean for centerInParent attribute is right");
+            }
+        }
+
+        String centerHorizontalValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.CenterHorizontal);
+        if (centerHorizontalValue!=null && !centerHorizontalValue.equals("")) {
+            try {
+                boolean centerHorizontal = Boolean.valueOf(centerHorizontalValue);
+                if (centerHorizontal)
+                    ((RelativeLayout.LayoutParams) layoutParams).addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new XmlPullParserException("make sure define boolean for centerHorizontal attribute is right");
+            }
+        }
+
+        String centerVerticalValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.CenterVertical);
+        if (centerVerticalValue!=null && !centerVerticalValue.equals("")) {
+            try {
+                boolean centerVertical = Boolean.valueOf(centerVerticalValue);
+                if (centerVertical)
+                    ((RelativeLayout.LayoutParams) layoutParams).addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new XmlPullParserException("make sure define boolean for centerVertical attribute is right");
+            }
+        }
     }
 
     private void readViewGroupAttribute() throws XmlPullParserException {

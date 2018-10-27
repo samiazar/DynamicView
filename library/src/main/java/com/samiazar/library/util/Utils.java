@@ -4,9 +4,13 @@ import android.app.Application;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.os.Build;
 import android.util.EventLog;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.View;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by USER
@@ -56,6 +60,38 @@ public class Utils {
         } else {
             Log.e(TAG, "in this time only support hex color string for color");
             return 0;
+        }
+    }
+
+    public static int parseId(String id) {
+        String idName;
+        if (id.startsWith("@+id/"))
+            idName = id.substring(4, id.length()-1);
+        else if (id.startsWith("@id/"))
+            idName = id.substring(3, id.length()-1);
+        else
+            return -1;
+        return (idName.hashCode() & 0xfffffff);
+    }
+
+    public static int generateViewId() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            return (generateUniqueInteger());
+        } else {
+            return (View.generateViewId());
+        }
+    }
+
+     private static int generateUniqueInteger() {
+        AtomicInteger sNextGeneratedId = new AtomicInteger(1);
+        for (;;) {
+            final int result = sNextGeneratedId.get();
+            // aapt-generated IDs have the high byte nonzero; clamp to the range under that.
+            int newValue = result + 1;
+            if (newValue > 0x00FFFFFF) newValue = 1; // Roll over to 1, not 0.
+            if (sNextGeneratedId.compareAndSet(result, newValue)) {
+                return result;
+            }
         }
     }
 }

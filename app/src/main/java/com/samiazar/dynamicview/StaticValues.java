@@ -20,24 +20,97 @@ public class StaticValues {
             "        android:text=\"Title\"" +
             "        android:layout_gravity=\"center\"" +
             "        android:textColor=\"#6633aa\"" +
-            "        android:textSize=\"64dp\"/>" +
-            "    " +
+            "        android:textSize=\"24dp\"" +
+            "        android:layout_margin=\"24dp\"/>" +
+            "" +
+            "" +
+            "    <RelativeLayout" +
+            "        android:layout_width=\"match_parent\"" +
+            "        android:layout_height=\"300dp\"" +
+            "        android:background=\"#aa4488\">" +
+            "        " +
+            "        <TextView" +
+            "            android:id=\"@+id/text_center\"" +
+            "            android:layout_width=\"wrap_content\"" +
+            "            android:layout_height=\"wrap_content\"" +
+            "            android:text=\"Center\"" +
+            "            android:layout_centerInParent=\"true\"" +
+            "            android:textColor=\"#2211aa\"" +
+            "            android:textSize=\"38dp\"/>" +
+            "" +
+            "        <TextView" +
+            "            android:id=\"@+id/text_baseLine\"" +
+            "            android:layout_width=\"wrap_content\"" +
+            "            android:layout_height=\"wrap_content\"" +
+            "            android:text=\"BaseLine\"" +
+            "            android:layout_alignBaseline=\"@+id/text_center\"" +
+            "            android:layout_toRightOf=\"@+id/text_center\"" +
+            "            android:textColor=\"#11ad19\"" +
+            "            android:textSize=\"12dp\"/>" +
+            "" +
+            "        <TextView" +
+            "            android:id=\"@+id/text_below\"" +
+            "            android:layout_width=\"wrap_content\"" +
+            "            android:layout_height=\"wrap_content\"" +
+            "            android:text=\"Below\"" +
+            "            android:layout_centerHorizontal=\"true\"" +
+            "            android:layout_below=\"@+id/text_center\"" +
+            "            android:textColor=\"#84aa12\"" +
+            "            android:textSize=\"12dp\"/>" +
+            "" +
+            "        <TextView" +
+            "            android:id=\"@+id/text_top\"" +
+            "            android:layout_width=\"wrap_content\"" +
+            "            android:layout_height=\"wrap_content\"" +
+            "            android:text=\"Top\"" +
+            "            android:layout_alignLeft=\"@+id/text_center\"" +
+            "            android:layout_above=\"@+id/text_center\"" +
+            "            android:textColor=\"#84aa12\"" +
+            "            android:textSize=\"14dp\"/>" +
+            "        " +
+            "    </RelativeLayout>" +
+            "" +
             "    <LinearLayout" +
             "        android:layout_width=\"match_parent\"" +
             "        android:layout_height=\"26dp\"" +
             "        android:background=\"#998855\"" +
             "        android:layout_margin=\"12dp\"/>" +
             "    " +
-            "    <TextView" +
-            "        android:layout_width=\"wrap_content\"" +
-            "        android:layout_height=\"wrap_content\"" +
-            "        android:textStyle=\"bold\"" +
-            "        android:text=\"SubTitle\"" +
-            "        android:layout_gravity=\"center\"" +
-            "        android:textColor=\"#2211aa\"" +
-            "        android:textSize=\"24dp\"/>" +
-            "" +
+            "    " +
             "</LinearLayout>";
+    
+    
+//    public static final String xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
+//            "<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"" +
+//            "    android:layout_width=\"match_parent\"" +
+//            "    android:layout_height=\"match_parent\"" +
+//            "    android:orientation=\"vertical\"" +
+//            "    android:background=\"#6688aa\">" +
+//            "    <TextView" +
+//            "        android:layout_width=\"wrap_content\"" +
+//            "        android:layout_height=\"wrap_content\"" +
+//            "        android:textStyle=\"bold\"" +
+//            "        android:text=\"Title\"" +
+//            "        android:layout_gravity=\"center\"" +
+//            "        android:textColor=\"#6633aa\"" +
+//            "        android:textSize=\"64dp\"/>" +
+//            "    " +
+//            "    <LinearLayout" +
+//            "        android:layout_width=\"match_parent\"" +
+//            "        android:layout_height=\"26dp\"" +
+//            "        android:background=\"#998855\"" +
+//            "        android:layout_margin=\"12dp\"/>" +
+//            "    " +
+//            "    <TextView" +
+//            "        android:layout_width=\"wrap_content\"" +
+//            "        android:layout_height=\"wrap_content\"" +
+//            "        android:textStyle=\"bold\"" +
+//            "        android:text=\"SubTitle\"" +
+//            "        android:layout_gravity=\"center\"" +
+//            "        android:textColor=\"#2211aa\"" +
+//            "        android:textSize=\"24dp\"/>" +
+//            "" +
+//            "</LinearLayout>";
     
 //    public static final String xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
 //            "<RelativeLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"" +
