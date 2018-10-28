@@ -26,6 +26,7 @@ public class TagKey {
     public static final String PaddingBottom = "android:paddingBottom";
     public static final String PaddingTop = "android:paddingTop";
     public static final String Background = "android:background";
+    public static final String Foreground = "android:foreground";
     public static final String MinWidth = "android:minWidth";
     public static final String MinHeight = "android:minHeight";
     public static final String Tag = "android:tag";

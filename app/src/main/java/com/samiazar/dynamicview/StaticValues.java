@@ -30,7 +30,7 @@ public class StaticValues {
             "        android:background=\"#aa4488\">" +
             "        " +
             "        <ImageView" +
-            "            android:layout_width=\"24dp\"" +
+            "            android:layout_width=\"64dp\"" +
             "            android:layout_height=\"64dp\"" +
             "            android:scaleType=\"centerCrop\"" +
             "            android:layout_alignParentLeft=\"true\"" +

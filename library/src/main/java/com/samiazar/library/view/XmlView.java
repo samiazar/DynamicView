@@ -4,6 +4,9 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -428,6 +431,33 @@ public class XmlView {
                     view.setBackgroundResource(resource);
                 } else {
                     view.setBackgroundColor(resource);
+                }
+            }
+        }
+        //endregion
+
+        //region Foreground
+        String foreground = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.Foreground);
+        if (foreground!=null && !foreground.equals("") && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            String link = ParsingUtil.parseLink(foreground);
+            if (!link.equals("")) {
+                new ImageDownloader(view) {
+                    @Override
+                    public void onLoadSource(WeakReference<View> viewWeakReference, Bitmap bitmap) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            viewWeakReference.get().setForeground(new BitmapDrawable(viewWeakReference.get().getContext().getResources(), bitmap));
+                        }
+                    }
+                }.execute(link);
+            } else {
+                int resource = ParsingUtil.parseColor(foreground);
+                if (resource == 0) {
+                    resource = ParsingUtil.parseResource(foreground, view.getContext());
+                    if (resource == 0)
+                        throw new XmlPullParserException("The value of foreground resource in view must be color like #rgb or address resource like @drawable");
+                    view.setForeground(ContextCompat.getDrawable(view.getContext(), resource));
+                } else {
+                    view.setForeground(new ColorDrawable(resource));
                 }
             }
         }
