@@ -48,5 +48,7 @@ public class TagValue {
     public static final String FitEnd = "fitEnt";
     public static final String FitStart = "fitStart";
     public static final String Matrix = "matrix";
+    public static final String StartActivity = "startActivity";
+    public static final String CallApi = "CallApi";
     public static final String X = "X";
 }

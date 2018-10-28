@@ -21,6 +21,7 @@ public class StaticValues {
             "        android:layout_gravity=\"center\"" +
             "        android:textColor=\"#6633aa\"" +
             "        android:textSize=\"24dp\"" +
+            "        android:onClick=\"startActivity/com.arioclub.android.ui.activity.MainActivity\"" +
             "        android:layout_margin=\"24dp\"/>" +
             "" +
             "" +

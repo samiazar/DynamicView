@@ -30,6 +30,7 @@ public class TagKey {
     public static final String MinWidth = "android:minWidth";
     public static final String MinHeight = "android:minHeight";
     public static final String Tag = "android:tag";
+    public static final String OnClick = "android:onClick";
     //linear layout
     public static final String Orientation = "android:orientation";
     public static final String WeightSum = "android:weightSum";

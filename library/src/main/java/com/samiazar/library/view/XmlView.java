@@ -1,7 +1,10 @@
 package com.samiazar.library.view;
 
 import android.annotation.SuppressLint;
+import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
@@ -485,6 +488,38 @@ public class XmlView {
         String tag = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.Tag);
         if (tag != null && !tag.equals("")) {
             view.setTag(tag);
+        }
+        //endregion
+
+        //region onClick
+        String onClickValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.OnClick);
+        if (onClickValue!=null && !onClickValue.equals("")) {
+            final String[] parameters = onClickValue.split("/");
+            switch (parameters[0]) {
+                case TagValue.StartActivity:
+                    view.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            try {
+                                Intent intent = new Intent();
+                                String[] packageName = parameters[1].split("\\.");
+                                intent.setComponent(new ComponentName(packageName[0]+"."+packageName[1]+"."+packageName[2], parameters[1]));
+                                view.getContext().startActivity(intent);
+                            } catch (ActivityNotFoundException e) {
+                                Log.e(TAG, "the activity was not found for changing page");
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                    break;
+
+                case TagValue.CallApi:
+                    Log.e(TAG, "onClick only support startActivity");
+                    break;
+
+                default:
+                    throw new XmlPullParserException("the onClick tag only support startActivity and callApi");
+            }
         }
         //endregion
     }
