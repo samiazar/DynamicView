@@ -14,6 +14,7 @@ import com.samiazar.library.util.TagView;
 import com.samiazar.library.view.XmlButton;
 import com.samiazar.library.view.XmlEditText;
 import com.samiazar.library.view.XmlFrameLayout;
+import com.samiazar.library.view.XmlImageView;
 import com.samiazar.library.view.XmlLinearLayout;
 import com.samiazar.library.view.XmlRelativeLayout;
 import com.samiazar.library.view.XmlScrollView;
@@ -83,6 +84,8 @@ public class XmlParser {
                 return new XmlButton(context, parser, parentType).getView();
             case TagView.EditText:
                 return new XmlEditText(context, parser, parentType).getView();
+            case TagView.ImageView:
+                return new XmlImageView(context, parser, parentType).getView();
             default:
                 return null;
         }

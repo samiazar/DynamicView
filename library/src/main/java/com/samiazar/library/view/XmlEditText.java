@@ -1,21 +1,10 @@
 package com.samiazar.library.view;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Typeface;
-import android.text.InputType;
-import android.text.TextUtils;
-import android.text.util.Linkify;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.samiazar.library.util.ParentType;
-import com.samiazar.library.util.TagKey;
-import com.samiazar.library.util.TagValue;
-import com.samiazar.library.util.TagView;
-import com.samiazar.library.util.Utils;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;

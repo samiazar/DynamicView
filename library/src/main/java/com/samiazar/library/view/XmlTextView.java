@@ -5,20 +5,15 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.text.InputType;
 import android.text.TextUtils;
-import android.text.method.PasswordTransformationMethod;
 import android.text.util.Linkify;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.samiazar.library.XmlParser;
 import com.samiazar.library.util.ParentType;
 import com.samiazar.library.util.TagKey;
 import com.samiazar.library.util.TagValue;
-import com.samiazar.library.util.TagView;
-import com.samiazar.library.util.Utils;
+import com.samiazar.library.util.ParsingUtil;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -233,7 +228,7 @@ public class XmlTextView extends XmlView {
 
         String textColorValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.TextColor);
         if (textColorValue != null && !textColorValue.equals("")) {
-            int color = Utils.parseColor(textColorValue);
+            int color = ParsingUtil.parseColor(textColorValue);
             if (color == 0)
                 throw new XmlPullParserException("The attribute text color define in wrong way");
             ((TextView) view).setTextColor(color);
@@ -241,7 +236,7 @@ public class XmlTextView extends XmlView {
 
         String textHintColorValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.TextColorHint);
         if (textHintColorValue != null && !textHintColorValue.equals("")) {
-            int color = Utils.parseColor(textHintColorValue);
+            int color = ParsingUtil.parseColor(textHintColorValue);
             if (color == 0)
                 throw new XmlPullParserException("The attribute text color define in wrong way");
             ((TextView) view).setHintTextColor(color);
@@ -249,7 +244,7 @@ public class XmlTextView extends XmlView {
 
         String textSizeValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.TextSize);
         if (textSizeValue != null && !textSizeValue.equals("")) {
-            int textSize = Utils.parseDpSize(textSizeValue, view.getContext());
+            int textSize = ParsingUtil.parseDpSize(textSizeValue, view.getContext());
             if (textSize < 0)
                 throw new XmlPullParserException("the text size must be dp size");
             ((TextView) view).setTextSize(textSize);

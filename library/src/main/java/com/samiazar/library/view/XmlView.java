@@ -2,25 +2,29 @@ package com.samiazar.library.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
-import com.samiazar.library.XmlParser;
+import com.samiazar.library.util.ImageDownloader;
 import com.samiazar.library.util.ParentType;
 import com.samiazar.library.util.TagKey;
 import com.samiazar.library.util.TagValue;
-import com.samiazar.library.util.Utils;
+import com.samiazar.library.util.ParsingUtil;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 
 /**
  * Created by USER
@@ -60,7 +64,7 @@ public class XmlView {
     private void readId() throws XmlPullParserException {
         String idValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.Id);
         if (idValue != null && !idValue.equals("")) {
-            int id = Utils.parseId(idValue);
+            int id = ParsingUtil.parseId(idValue);
             if (id < 0 ) throw new XmlPullParserException("make sure define id for views in right way");
             view.setId(id);
         }
@@ -80,7 +84,7 @@ public class XmlView {
                 width = ViewGroup.LayoutParams.MATCH_PARENT;
                 break;
             default:
-                width = Utils.parseDpSize(widthValue, view.getContext());
+                width = ParsingUtil.parseDpSize(widthValue, view.getContext());
                 if (width < 0) {
                     throw new XmlPullParserException("make sure you set layout_width in all views");
                 }
@@ -95,7 +99,7 @@ public class XmlView {
                 height = ViewGroup.LayoutParams.MATCH_PARENT;
                 break;
             default:
-                height = Utils.parseDpSize(heightValue, view.getContext());
+                height = ParsingUtil.parseDpSize(heightValue, view.getContext());
                 if (height < 0) {
                     Log.e(TAG, "make sure you set layout_height in all views");
                     throw new XmlPullParserException("make sure you set layout_height in all views");
@@ -173,63 +177,63 @@ public class XmlView {
 
         String aboveValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.Above);
         if (aboveValue!=null && !aboveValue.equals("")) {
-            int targetViewId = Utils.parseId(aboveValue);
+            int targetViewId = ParsingUtil.parseId(aboveValue);
             if (targetViewId < 0) throw new XmlPullParserException("make sure define id of target view for above attribute is right");
             ((RelativeLayout.LayoutParams) layoutParams).addRule(RelativeLayout.ABOVE, targetViewId);
         }
 
         String belowValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.Below);
         if (belowValue!=null && !belowValue.equals("")) {
-            int targetViewId = Utils.parseId(belowValue);
+            int targetViewId = ParsingUtil.parseId(belowValue);
             if (targetViewId < 0) throw new XmlPullParserException("make sure define id of target view for below attribute is right");
             ((RelativeLayout.LayoutParams) layoutParams).addRule(RelativeLayout.BELOW, targetViewId);
         }
 
         String rightOfValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.ToRightOf);
         if (rightOfValue!=null && !rightOfValue.equals("")) {
-            int targetViewId = Utils.parseId(rightOfValue);
+            int targetViewId = ParsingUtil.parseId(rightOfValue);
             if (targetViewId < 0) throw new XmlPullParserException("make sure define id of target view for toRightOf attribute is right");
             ((RelativeLayout.LayoutParams) layoutParams).addRule(RelativeLayout.RIGHT_OF, targetViewId);
         }
 
         String leftOfValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.ToLeftOf);
         if (leftOfValue!=null && !leftOfValue.equals("")) {
-            int targetViewId = Utils.parseId(leftOfValue);
+            int targetViewId = ParsingUtil.parseId(leftOfValue);
             if (targetViewId < 0) throw new XmlPullParserException("make sure define id of target view for toLeftOf attribute is right");
             ((RelativeLayout.LayoutParams) layoutParams).addRule(RelativeLayout.LEFT_OF, targetViewId);
         }
 
         String alignTopValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.AlignTop);
         if (alignTopValue!=null && !alignTopValue.equals("")) {
-            int targetViewId = Utils.parseId(alignTopValue);
+            int targetViewId = ParsingUtil.parseId(alignTopValue);
             if (targetViewId < 0) throw new XmlPullParserException("make sure define id of target view for alignTop attribute is right");
             ((RelativeLayout.LayoutParams) layoutParams).addRule(RelativeLayout.ALIGN_TOP, targetViewId);
         }
 
         String alignBottomValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.AlignBttom);
         if (alignBottomValue!=null && !alignBottomValue.equals("")) {
-            int targetViewId = Utils.parseId(alignBottomValue);
+            int targetViewId = ParsingUtil.parseId(alignBottomValue);
             if (targetViewId < 0) throw new XmlPullParserException("make sure define id of target view for alignBottom attribute is right");
             ((RelativeLayout.LayoutParams) layoutParams).addRule(RelativeLayout.ALIGN_BOTTOM, targetViewId);
         }
 
         String alignBaselineValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.AlignBaseline);
         if (alignBaselineValue!=null && !alignBaselineValue.equals("")) {
-            int targetViewId = Utils.parseId(alignBaselineValue);
+            int targetViewId = ParsingUtil.parseId(alignBaselineValue);
             if (targetViewId < 0) throw new XmlPullParserException("make sure define id of target view for alignBaseline attribute is right");
             ((RelativeLayout.LayoutParams) layoutParams).addRule(RelativeLayout.ALIGN_BASELINE, targetViewId);
         }
 
         String alignLeftValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.AlignLeft);
         if (alignLeftValue!=null && !alignLeftValue.equals("")) {
-            int targetViewId = Utils.parseId(alignLeftValue);
+            int targetViewId = ParsingUtil.parseId(alignLeftValue);
             if (targetViewId < 0) throw new XmlPullParserException("make sure define id of target view for alignLeft attribute is right");
             ((RelativeLayout.LayoutParams) layoutParams).addRule(RelativeLayout.ALIGN_LEFT, targetViewId);
         }
 
         String alignRightValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.AlignRight);
         if (alignRightValue!=null && !alignRightValue.equals("")) {
-            int targetViewId = Utils.parseId(alignRightValue);
+            int targetViewId = ParsingUtil.parseId(alignRightValue);
             if (targetViewId < 0) throw new XmlPullParserException("make sure define id of target view for alignRight attribute is right");
             ((RelativeLayout.LayoutParams) layoutParams).addRule(RelativeLayout.ALIGN_RIGHT, targetViewId);
         }
@@ -319,39 +323,40 @@ public class XmlView {
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private void readViewGroupAttribute() throws XmlPullParserException {
         //region Margin Parsing
         int marginLeft = 0, marginRight = 0, marginTop = 0, marginBottom = 0;
         String marginValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.Margin);
         if (marginValue != null && !(marginValue.equals(""))) {
-            marginLeft = Utils.parseDpSize(marginValue, view.getContext());
-            marginRight = Utils.parseDpSize(marginValue, view.getContext());
-            marginTop = Utils.parseDpSize(marginValue, view.getContext());
-            marginBottom = Utils.parseDpSize(marginValue, view.getContext());
+            marginLeft = ParsingUtil.parseDpSize(marginValue, view.getContext());
+            marginRight = ParsingUtil.parseDpSize(marginValue, view.getContext());
+            marginTop = ParsingUtil.parseDpSize(marginValue, view.getContext());
+            marginBottom = ParsingUtil.parseDpSize(marginValue, view.getContext());
             if (marginLeft < 0 || marginRight < 0 || marginTop < 0 || marginBottom < 0)
                 throw new XmlPullParserException("The value of margin in view must be pure integer");
         }
         String marginLeftValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.MarginLeft);
         if (marginLeftValue != null && !(marginLeftValue.equals(""))) {
-            marginLeft = Utils.parseDpSize(marginLeftValue, view.getContext());
+            marginLeft = ParsingUtil.parseDpSize(marginLeftValue, view.getContext());
             if (marginLeft < 0)
                 throw new XmlPullParserException("The value of margin in view must be pure integer");
         }
         String marginRightValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.MarginRight);
         if (marginRightValue != null && !(marginRightValue.equals(""))) {
-            marginRight = Utils.parseDpSize(marginRightValue, view.getContext());
+            marginRight = ParsingUtil.parseDpSize(marginRightValue, view.getContext());
             if (marginRight < 0)
                 throw new XmlPullParserException("The value of margin in view must be pure integer");
         }
         String marginBottomValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.MarginBottom);
         if (marginBottomValue != null && !(marginBottomValue.equals(""))) {
-            marginBottom = Utils.parseDpSize(marginBottomValue, view.getContext());
+            marginBottom = ParsingUtil.parseDpSize(marginBottomValue, view.getContext());
             if (marginBottom < 0)
                 throw new XmlPullParserException("The value of margin in view must be pure integer");
         }
         String marginTopValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.MarginTop);
         if (marginTopValue != null && !(marginTopValue.equals(""))) {
-            marginTop = Utils.parseDpSize(marginTopValue, view.getContext());
+            marginTop = ParsingUtil.parseDpSize(marginTopValue, view.getContext());
             if (marginTop < 0)
                 throw new XmlPullParserException("The value of margin in view must be pure integer");
         }
@@ -369,34 +374,34 @@ public class XmlView {
         int paddingLeft = 0, paddingRight = 0, paddingTop = 0, paddingBottom = 0;
         String paddingValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.Padding);
         if (paddingValue != null && !(paddingValue.equals(""))) {
-            paddingLeft = Utils.parseDpSize(paddingValue, view.getContext());
-            paddingRight = Utils.parseDpSize(paddingValue, view.getContext());
-            paddingTop = Utils.parseDpSize(paddingValue, view.getContext());
-            paddingBottom = Utils.parseDpSize(paddingValue, view.getContext());
+            paddingLeft = ParsingUtil.parseDpSize(paddingValue, view.getContext());
+            paddingRight = ParsingUtil.parseDpSize(paddingValue, view.getContext());
+            paddingTop = ParsingUtil.parseDpSize(paddingValue, view.getContext());
+            paddingBottom = ParsingUtil.parseDpSize(paddingValue, view.getContext());
             if (paddingLeft < 0 || paddingBottom < 0 || paddingTop < 0 || paddingRight < 0)
                 throw new XmlPullParserException("The value of padding in view must be pure integer");
         }
         String paddingLeftValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.PaddingLeft);
         if (paddingLeftValue != null && !(paddingLeftValue.equals(""))) {
-            paddingLeft = Utils.parseDpSize(paddingLeftValue, view.getContext());
+            paddingLeft = ParsingUtil.parseDpSize(paddingLeftValue, view.getContext());
             if (paddingLeft < 0)
                 throw new XmlPullParserException("The value of padding in view must be pure integer");
         }
         String paddingRightValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.PaddingRight);
         if (paddingRightValue != null && !(paddingRightValue.equals(""))) {
-            paddingRight = Utils.parseDpSize(paddingRightValue, view.getContext());
+            paddingRight = ParsingUtil.parseDpSize(paddingRightValue, view.getContext());
             if (paddingRight < 0)
                 throw new XmlPullParserException("The value of padding in view must be pure integer");
         }
         String paddingBottomValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.PaddingBottom);
         if (paddingBottomValue != null && !(paddingBottomValue.equals(""))) {
-            paddingBottom = Utils.parseDpSize(paddingBottomValue, view.getContext());
+            paddingBottom = ParsingUtil.parseDpSize(paddingBottomValue, view.getContext());
             if (paddingBottom < 0 )
                 throw new XmlPullParserException("The value of padding in view must be pure integer");
         }
         String paddingTopValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.PaddingTop);
         if (paddingTopValue != null && !(paddingTopValue.equals(""))) {
-            paddingTop = Utils.parseDpSize(paddingTopValue, view.getContext());
+            paddingTop = ParsingUtil.parseDpSize(paddingTopValue, view.getContext());
             if (paddingTop < 0)
                 throw new XmlPullParserException("The value of padding in view must be pure integer");
         }
@@ -406,23 +411,32 @@ public class XmlView {
         //region Background
         String background = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.Background);
         if (background!=null && !background.equals("")) {
-            int resource = Utils.parseColor(background);
-            if (resource == 0) {
-                resource = Utils.parseResource(background);
-                if (resource == 0)
-                    throw new XmlPullParserException("The value of background resource in view must be color like #rgb or address resource like @drawable");
-                view.setBackgroundResource(resource);
+            String link = ParsingUtil.parseLink(background);
+            if (!link.equals("")) {
+                new ImageDownloader(view) {
+                    @Override
+                    public void onLoadSource(WeakReference<View> viewWeakReference, Bitmap bitmap) {
+                        viewWeakReference.get().setBackground(new BitmapDrawable(viewWeakReference.get().getContext().getResources(), bitmap));
+                    }
+                }.execute(link);
             } else {
-                view.setBackgroundColor(resource);
+                int resource = ParsingUtil.parseColor(background);
+                if (resource == 0) {
+                    resource = ParsingUtil.parseResource(background, view.getContext());
+                    if (resource == 0)
+                        throw new XmlPullParserException("The value of background resource in view must be color like #rgb or address resource like @drawable");
+                    view.setBackgroundResource(resource);
+                } else {
+                    view.setBackgroundColor(resource);
+                }
             }
-
         }
         //endregion
 
         //region MinWidth and MinHeight
         String minWidthValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.MinWidth);
         if (minWidthValue!=null && !minWidthValue.equals("")) {
-            int minWidth = Utils.parseDpSize(minWidthValue, view.getContext());
+            int minWidth = ParsingUtil.parseDpSize(minWidthValue, view.getContext());
             if (minWidth < 0)
                 throw new XmlPullParserException("The value of min width must be dp integer like 24dp");
             view.setMinimumWidth(minWidth);
@@ -430,7 +444,7 @@ public class XmlView {
 
         String minHeightValue = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.MinHeight);
         if (minHeightValue!=null && !minHeightValue.equals("")) {
-            int minHeight = Utils.parseDpSize(minHeightValue, view.getContext());
+            int minHeight = ParsingUtil.parseDpSize(minHeightValue, view.getContext());
             if (minHeight < 0)
                 throw new XmlPullParserException("The value of min width must be dp integer like 24dp");
             view.setMinimumHeight(minHeight);

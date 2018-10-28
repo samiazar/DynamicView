@@ -35,4 +35,18 @@ public class TagValue {
     public static final String Date = "date";
     public static final String TextPassword = "textPassword";
     public static final String Time = "time";
+    public static final String Add = "add";
+    public static final String Multiply = "multiply";
+    public static final String Screen = "screen";
+    public static final String Src_Atop = "src_atop";
+    public static final String Src_In = "src_in";
+    public static final String Src_Over = "src_over";
+    public static final String CenterCrop = "centerCrop";
+    public static final String FitXY = "fitXY";
+    public static final String CenterInside = "centerInside";
+    public static final String FitCenter = "fitCenter";
+    public static final String FitEnd = "fitEnt";
+    public static final String FitStart = "fitStart";
+    public static final String Matrix = "matrix";
+    public static final String X = "X";
 }

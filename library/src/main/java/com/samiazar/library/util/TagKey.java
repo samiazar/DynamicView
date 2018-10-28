@@ -63,4 +63,10 @@ public class TagKey {
     public static final String CursorVisible = "android:cursorVisible";
     public static final String TextAllCaps = "android:textAllCaps";
     //image view
+    public static final String AdjustViewBounds = "android:adjustViewBounds";
+    public static final String CropToPadding = "android:cropToPadding";
+    public static final String ScaleType = "android:scaleType";
+    public static final String Src = "android:src";
+    public static final String Tint = "android:tint";
+    public static final String TintMode = "android:tintMode";
 }

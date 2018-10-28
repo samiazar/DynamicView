@@ -29,6 +29,19 @@ public class StaticValues {
             "        android:layout_height=\"300dp\"" +
             "        android:background=\"#aa4488\">" +
             "        " +
+            "        <ImageView" +
+            "            android:layout_width=\"24dp\"" +
+            "            android:layout_height=\"64dp\"" +
+            "            android:scaleType=\"centerCrop\"" +
+            "            android:layout_alignParentLeft=\"true\"" +
+            "            android:src=\"http://api.ariogames.ir/fileuploader/107800\"/>" +
+            "" +
+            "        <ImageView" +
+            "            android:layout_width=\"64dp\"" +
+            "            android:layout_height=\"64dp\"" +
+            "            android:layout_alignParentRight=\"true\"" +
+            "            android:src=\"@drawable/ic_launcher_background\"/>" +
+            "" +
             "        <TextView" +
             "            android:id=\"@+id/text_center\"" +
             "            android:layout_width=\"wrap_content\"" +
@@ -73,7 +86,7 @@ public class StaticValues {
             "    <LinearLayout" +
             "        android:layout_width=\"match_parent\"" +
             "        android:layout_height=\"26dp\"" +
-            "        android:background=\"#998855\"" +
+            "        android:background=\"@color/color2\"" +
             "        android:layout_margin=\"12dp\"/>" +
             "    " +
             "    " +
