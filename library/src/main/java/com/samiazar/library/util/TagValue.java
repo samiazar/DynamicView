@@ -45,10 +45,11 @@ public class TagValue {
     public static final String FitXY = "fitXY";
     public static final String CenterInside = "centerInside";
     public static final String FitCenter = "fitCenter";
-    public static final String FitEnd = "fitEnt";
+    public static final String FitEnd = "fitEnd";
     public static final String FitStart = "fitStart";
     public static final String Matrix = "matrix";
     public static final String StartActivity = "startActivity";
     public static final String CallApi = "CallApi";
+    public static final String NewXml = "NewXml";
     public static final String X = "X";
 }

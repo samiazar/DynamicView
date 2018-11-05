@@ -56,7 +56,7 @@ public class TagKey {
     public static final String Text = "android:text";
     public static final String Hint = "android:hint";
     public static final String TextColor = "android:textColor";
-    public static final String TextColorHint = "android:textColor";
+    public static final String TextColorHint = "android:textColorHint";
     public static final String TextSize = "android:textSize";
     public static final String TextStyle = "android:textStyle";
     public static final String MaxLines = "android:maxLines";

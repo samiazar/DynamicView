@@ -147,7 +147,7 @@ public class XmlImageView extends XmlView {
             if (color == 0) throw new XmlPullParserException("the color define in tint for ImageView is incorrect");
         }
 
-        String tintMode = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.Tint);
+        String tintMode = xmlParser.getAttributeValue(TagKey.AndroidNameSpace, TagKey.TintMode);
         PorterDuff.Mode mode = null;
         if (tintMode!=null && !tintMode.equals("")) {
             switch (tintMode) {
