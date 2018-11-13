@@ -115,9 +115,24 @@ the list of tags in ImageView that you can be used and library parse that correc
 also other tags that you need to use in ImageView tag availabel in [View](https://github.com/samiazar/DynamicView#view) section.
 
 ## onClick
-In each view you can define onClick event that onPerform that goes to another activity.
-- android:onClick = [startActivity/(the complete name of activity with package name)]
-or onPerform Click call a api as a fire and forget.
-- android:onClick = [CallApi/(the url of api)]
-or onPerform Click call api and get new xml view to reload page.
-- android:onClick = [NewXml/(the url of api that return new xml)]
+In each view you can define onClick event.
+
+if you want to on perform click goes to another activity you must define "onClick" tag and "activity" tag as below: 
+- android:onClick = [StartActivity]
+- android:activity = [(the complete name of activity with package name)]
+
+or if you want to on perfom click call an API as a fire and forget you must define "onClick" tag and "url" tag and "method" tag and "body" tag and also "header" tag as below:
+- android:onClick = [CallApi]
+- android:url = [(the url of api)]
+- android:method = [GET/POST/DELETE/PUT]
+- android:body = [(a json text that you want put into body of call)]
+- android:header = [(a json text that each key is header key and each value is header value)]
+
+and if you want to on perfon click call an API and get new XML to show to user, You must define "onClick" tag and "url" tag and "method" tag and "body" tag and also "header" tag as below:
+
+- android:onClick = [NewXMl]
+- android:url = [(the url of api)]
+- android:method = [GET/POST/DELETE/PUT]
+- android:body = [(a json text that you want put into body of call)]
+- android:header = [(a json text that each key is header key and each value is header value)]
+
