@@ -128,11 +128,8 @@ or if you want to on perfom click call an API as a fire and forget you must defi
 - android:body = [(a json text that you want put into body of call)]
 - android:header = [(a json text that each key is header key and each value is header value)]
 
-and if you want to on perfon click call an API and get new XML to show to user, You must define "onClick" tag and "url" tag and "method" tag and "body" tag and also "header" tag as below:
+and if you want to on perfon click call an API and get new XML to show to user, You must define "onClick" tag and "url" tagas below (remember the response of api must be pure xml):
 
 - android:onClick = [NewXMl]
 - android:url = [(the url of api)]
-- android:method = [GET/POST/DELETE/PUT]
-- android:body = [(a json text that you want put into body of call)]
-- android:header = [(a json text that each key is header key and each value is header value)]
 
