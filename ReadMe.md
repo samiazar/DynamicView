@@ -11,21 +11,25 @@ This library helps you to implement an activity page with string XML. Assume an 
  - [TextView (EditText, Button)](https://github.com/samiazar/DynamicView#TextView-%28EditText,-Button%29)
  - [ImageView](https://github.com/samiazar/DynamicView#imageview)
  - [onClick](https://github.com/samiazar/DynamicView#onclick)
+-  [GoTo](https://github.com/samiazar/DynamicView#goto)
+ - [XmlJson](https://github.com/samiazar/DynamicView#xmljson)
 ## First step
 First of all you must add [jar](https://github.com/samiazar/DynamicView/blob/master/library/dynamicView-library.jar) file into project (sorry I have not enough time to adding the project into mavenRepository).
- In activity that you want shows custom xml you must add a ViewGroup in root and then do like this:
- 
-    try {  
-        List<View> views = new XmlParser(xmlString, context).parse();  
-        if (views != null)  // if XML, not parseable the views can be null
-          for (View view : views)  
-             layout.addView(view);
-    } catch (IOException e) {  
-        e.printStackTrace();  
-    } catch (XmlPullParserException e) {  
-        e.printStackTrace(); //this section occurs when a part of XML is wrong
-    } 
-the class of XmlParser get a string that must be valid XML and context then *parse()* method do all the works.
+
+ In activity that you want shows custom xml you must implements *XmlViewListener* interface.
+This interface have three method.
+The ***onReadyView(List\<View> viewList)*** called when the view is ready to show. The last index of list is the last view you sent to parsed, 
+The ***onErrorViews(Exception e)*** called when a exception occured while parsing view,
+And ***The onLoadViews()*** called while api call executing and you can show progressBar for user.
+If you have a XML string you must call:
+
+    new XmlGenerator(this, this).parse(xml);
+and if you have a URL that in response returned a XML you must call:
+
+    new XmlGenerator(this, this).loadXml(url);
+then the rest of the work done by the library and you will be notified in *XmlViewListener* interface methods.
+The constructor of XmlGenrator class gets an *XmlViewListener* interface and Context as arguments.
+
 ## View
 the list of tags in any View that you can be used and library parse that correctly.
  - (**required**) android:layout_width = [wrap_content / match_parent/ (int)dp]
@@ -99,6 +103,7 @@ the list of tags in TextView and other child classes like editText and Button th
  - android:cursorVisible = [Boolean[
  - android:textAllCaps = [Boolean[
  - android:autoLink = [all / map / web / phone / email / none]
+ - android:font = [the address of font file that existed in assets folders like fonts/Roboto.ttf]
 
 also other tags that you need to use in TextView tag availabel in [View](https://github.com/samiazar/DynamicView#view) section.
 ## ImageView
@@ -117,19 +122,45 @@ also other tags that you need to use in ImageView tag availabel in [View](https:
 ## onClick
 In each view you can define onClick event.
 
-if you want to on perform click goes to another activity you must define "onClick" tag and "activity" tag as below: 
-- android:onClick = [StartActivity]
-- android:activity = [(the complete name of activity with package name)]
+ - Start Another Activity:
+ if you want to on perform click goes to another activity you must
+   define "onClick" tag and "activity" tag and optional "extras" tag as below: 
+   - android:onClick = [StartActivity]
+   - android:activity = [(the complete name of activity with package name)]
+   - **optional** android:extras = [[XmlJson](https://github.com/samiazar/DynamicView#xmljson)]
 
-or if you want to on perfom click call an API as a fire and forget you must define "onClick" tag and "url" tag and "method" tag and "body" tag and also "header" tag as below:
-- android:onClick = [CallApi]
-- android:url = [(the url of api)]
-- android:method = [GET/POST/DELETE/PUT]
-- android:body = [(a json text that you want put into body of call)]
-- android:header = [(a json text that each key is header key and each value is header value)]
+ - Call an APi as Fire and Forget:   
+   if you want to on perfom click call an API as a fire and forget
+   you must define "onClick" tag and "url" tag and "method" tag and
+   "body" tag and also "header" tag as below:
+   - android:onClick = [CallApi]
+   - android:url = [(the url of api)]
+   - android:method = [GET/POST/DELETE/PUT]
+   - android:body = [[XmlJson](https://github.com/samiazar/DynamicView#xmljson)]
+   - android:header = [[XmlJson](https://github.com/samiazar/DynamicView#xmljson)]
 
-and if you want to on perfon click call an API and get new XML to show to user, You must define "onClick" tag and "url" tagas below (remember the response of api must be pure xml):
+ - Call an APi for get new Xml:      
+   if you want to on perfon click call an API and get new XML to
+   show to user, You must define "onClick" tag and "url" tag as below
+   (remember the response of api must be pure xml):
+   
+   - android:onClick = [NewXMl]
+   - android:url = [(the url of api)]
+ - Finish Activity:
+   if yout want finish this activity just set "onClick" tag to "Finish":
+    - android:onClick = [Finish]
+ - Toast:
+  if you want show a toast to user you must define "onClick" tag and "toast" tag as below:
+   - android:onClick = [Toast]
+   - android:toast = [(the string that you want show to user)]
 
-- android:onClick = [NewXMl]
-- android:url = [(the url of api)]
+## GoTo
+Maybe sometime you want dont show any view and just go to another page of your application.
+For this purpose you must provide string that start with "goto:" text instead of regular XML string.
+And in continue add json with three keys; "package" key for the package of your app, "activity" key for spec the activity you want go to (remember the name of activity and package of activity together), "extras" key for data that you want send to activity, the format of extras value is [XmlJson](https://github.com/samiazar/DynamicView#xmljson) and can be empty if you had no data to send to activity.
 
+## XmlJson
+The XmlJson is a format that made by myself for parsing json in xml.
+A key value string which separate each key value from another with '|' and separate each key from each value with '$' (exmaple: key1\$value1|key2\$value2).
+Also if you want to declare the format of value you can add format class before value and seprate that from value with '~' (exmaple: key1\$Integer\~value1|key2\$String\~value2).
+All format that supported is Integer, String, Boolean, Float, Long.
