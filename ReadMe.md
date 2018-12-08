@@ -1,3 +1,4 @@
+
 ## Dynamic View
 This library helps you to implement an activity page with string XML. Assume an activity that can be changing to whatever you want just in runtime. For example, you can call an API to the server and get new string then with the utility of this library you can create an android page with the server response.
 
@@ -50,6 +51,7 @@ the list of tags in any View that you can be used and library parse that correct
  - android:minWidth = [(int)dp]
  - android:minHeight = [(int)dp]
  - android:tag = [String]
+ - android:rotate=[(float)]
 
  If parent of view is LinearLayout you can use these tags too.
  
