@@ -155,6 +155,14 @@ In each view you can define onClick event.
   if you want show a toast to user you must define "onClick" tag and "toast" tag as below:
    - android:onClick = [Toast]
    - android:toast = [(the string that you want show to user)]
+ 
+ - SharedPreferences:
+ if you want to change the shared preferences you must defin "onClick" tag, "preferences", "key", "value" and "valueType" as below:
+    - android:onClick = [SharedPreferences]
+    - android:preferences = [the name of shared preferences]
+    - android:key = [tha name of key that you want change that]
+    - android:value = [the value that you want update]
+    - android:valueType =  [String, Integer, Float, Long, Boolean]
 
 ## GoTo
 Maybe sometime you want dont show any view and just go to another page of your application.
