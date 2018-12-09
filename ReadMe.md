@@ -123,6 +123,7 @@ also other tags that you need to use in ImageView tag availabel in [View](https:
 
 ## onClick
 In each view you can define onClick event.
+Also you can add multiple action on each view by divide each one of them with "|". For example onClick = "Toast|StartActivity" shows a toast and then start a activity that you defined.
 
  - Start Another Activity:
  if you want to on perform click goes to another activity you must
